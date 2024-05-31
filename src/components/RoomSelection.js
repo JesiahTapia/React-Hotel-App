@@ -1,6 +1,6 @@
-import React from 'react';
-import RoomCard from './RoomCard';
-import './RoomSelection.css';
+import React from 'react'
+import RoomCard from './RoomCard'
+import './RoomSelection.css'
 
 const RoomSelection = ({ rooms, onSelectRoom }) => {
   return (
@@ -9,7 +9,7 @@ const RoomSelection = ({ rooms, onSelectRoom }) => {
         <RoomCard key={room.id} room={room} onSelect={onSelectRoom} />
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default RoomSelection;
+export default RoomSelection

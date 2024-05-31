@@ -1,5 +1,5 @@
-import React from 'react';
-import './RoomCard.css';
+import React from 'react'
+import './RoomCard.css'
 
 const RoomCard = ({ room, onSelect }) => {
   return (
@@ -9,7 +9,7 @@ const RoomCard = ({ room, onSelect }) => {
       <p>Price: ${room.price}</p>
       <p>Status: {room.available ? 'Available' : 'Unavailable'}</p>
     </div>
-  );
-};
+  )
+}
 
-export default RoomCard;
+export default RoomCard
