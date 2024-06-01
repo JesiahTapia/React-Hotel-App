@@ -5,7 +5,7 @@ import './RoomCard.css' // Import the CSS file for this component
 const RoomCard = ({ room, onSelect }) => {
   // Return the JSX structure of the component
   return (
-    // Apply dynamic class based on room availability and set up an onClick event
+    // Set class based on room availability and code for the onClick event
     <div className={`room-card ${room.available ? 'available' : 'unavailable'}`} onClick={() => onSelect(room.id)}>
       <h3>{room.name}</h3> {/* Display room name */}
       <p>Type: {room.type}</p> {/* Display room type */}
