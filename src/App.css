@@ -95,3 +95,20 @@ body {
   display: block;
   margin-bottom: 5px;
 }
+
+.email-input {
+  margin: 10px 0;
+}
+
+.email-input label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.email-input input {
+  width: 50%;  /* Adjust the width as needed */
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}

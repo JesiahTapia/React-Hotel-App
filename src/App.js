@@ -3,7 +3,7 @@ import RoomSelection from './components/RoomSelection' // Import RoomSelection c
 import RoomDetails from './components/RoomDetails' // Import RoomDetails component
 import './App.css' // Import the CSS file for this component
 
-// Define the main App component
+// Define the App component
 const App = () => {
   // Define state for rooms, search input, dropdown visibility, and selected room
   const [rooms, setRooms] = useState([
@@ -35,15 +35,17 @@ const App = () => {
   }
 
   // Function to handle booking a room
-  const handleBookRoom = (roomId, checkInDate, checkOutDate) => {
+  const handleBookRoom = (roomId, checkInDate, checkOutDate, email) => {
     const updatedRooms = rooms.map((room) =>
-      room.id === roomId ? { ...room, available: false } : room
+      room.id === roomId ? { ...room, available: false } : room    
     )
     setRooms(updatedRooms)
     setSelectedRoom({ ...selectedRoom, available: false })
-    console.log(`Room ${roomId} booked from ${checkInDate} to ${checkOutDate}`)
-  }
-
+    const timeDiff = Math.abs(checkOutDate - checkInDate)
+    const diffDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24))
+    const totalPrice = diffDays * selectedRoom.price;
+    console.log(`Room ${roomId} booked for ${checkInDate} until ${checkOutDate} for ${diffDays} days. Total price: $${totalPrice}. Confirmation email sent to ${email}`)
+  };
   // Filter rooms based on search input
   const filteredRooms = rooms.filter((room) => {
     const searchLower = search.toLowerCase()
@@ -58,7 +60,7 @@ const App = () => {
   return (
     <div className="app">
       <header className="App-header">
-        <h1>Hotel Booking App</h1> {/* App title */}
+        <h1>Hotel Booking App</h1> 
       </header>
       <div className="search-container">
         <input
@@ -69,7 +71,7 @@ const App = () => {
         />
       </div>
       <button className="toggle-button" onClick={toggleDropdown}>
-        {dropdownOpen ? 'Hide Rooms' : 'Show Rooms'} {/* Button text based on dropdown state */}
+        {dropdownOpen ? 'Hide Rooms' : 'Show Rooms'} 
       </button>
       {dropdownOpen && (
         <RoomSelection rooms={filteredRooms} onSelectRoom={handleSelectRoom} /> 

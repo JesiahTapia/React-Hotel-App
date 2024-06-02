@@ -7,16 +7,37 @@ const RoomDetails = ({ room, onBookRoom }) => {
   // Define state for check-in and check-out dates
   const [checkInDate, setCheckInDate] = useState(null)
   const [checkOutDate, setCheckOutDate] = useState(null)
+  const [email, setEmail] = useState('')
+  const [totalPrice, setTotalPrice] = useState(0)
 
   // If no room is selected, don't render anything
   if (!room) return null
+
+  const calculateTotalPrice = (checkIn, checkOut) => {
+    if (checkIn && checkOut) {
+      const timeDiff = Math.abs(checkOut - checkIn)
+      const diffDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24))
+      setTotalPrice(diffDays * room.price)
+    }
+  };
+
+  const handleCheckInChange = (date) => {
+    setCheckInDate(date)
+    calculateTotalPrice(date, checkOutDate)
+  };
+
+  const handleCheckOutChange = (date) => {
+    setCheckOutDate(date);
+    calculateTotalPrice(checkInDate, date);
+  };
+
 
   // Function to handle booking the room
   const handleBookRoom = () => {
     if (checkInDate && checkOutDate) {
       onBookRoom(room.id, checkInDate, checkOutDate) // Call onBookRoom function passed as a prop
     } else {
-      alert('Please select both check-in and check-out dates') // Show alert if dates are not selected
+      alert('Select check-in and check-out dates before booking') // Show alert if dates are not selected
     }
   }
 
@@ -32,7 +53,7 @@ const RoomDetails = ({ room, onBookRoom }) => {
         <label>Check-in Date:</label>
         <DatePicker
           selected={checkInDate} // Set the selected date
-          onChange={(date) => setCheckInDate(date)} // Update state on date change
+          onChange={handleCheckInChange}// Update state on date change
           selectsStart
           startDate={checkInDate}
           endDate={checkOutDate}
@@ -43,13 +64,25 @@ const RoomDetails = ({ room, onBookRoom }) => {
         <label>Check-out Date:</label>
         <DatePicker
           selected={checkOutDate} // Set the selected date
-          onChange={(date) => setCheckOutDate(date)} // Update state on date change
+          onChange={handleCheckOutChange} // Update state on date change
           selectsEnd
           startDate={checkInDate}
           endDate={checkOutDate}
           minDate={checkInDate} // Disable dates before check-in date
         />
       </div>
+
+      <div className="email-input">
+        <label>Email:</label>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Enter your email"
+        />
+      </div>
+
+      <p>Total Price: ${totalPrice}</p>
 
       <button
         className="book-button"
