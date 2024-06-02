@@ -17,6 +17,12 @@ body {
   color: white;
 }
 
+.App-header img.hotel-logo {
+  height: 50px;
+  width: auto;
+  margin-right: 10px;
+}
+
 .search-container {
   margin: 20px 0;
 }

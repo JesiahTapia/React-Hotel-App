@@ -45,7 +45,8 @@ const App = () => {
     const diffDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24))
     const totalPrice = diffDays * selectedRoom.price;
     console.log(`Room ${roomId} booked for ${checkInDate} until ${checkOutDate} for ${diffDays} days. Total price: $${totalPrice}. Confirmation email sent to ${email}`)
-  };
+    alert('Congratulations, you have successfully booked a stay at 501Hotels!')
+  }
   // Filter rooms based on search input
   const filteredRooms = rooms.filter((room) => {
     const searchLower = search.toLowerCase()
@@ -60,7 +61,8 @@ const App = () => {
   return (
     <div className="app">
       <header className="App-header">
-        <h1>Hotel Booking App</h1> 
+      <img src="/hotel-logo.png" alt="Hotel Logo" className="hotel-logo" />
+        <h1>501Hotels</h1> 
       </header>
       <div className="search-container">
         <input
